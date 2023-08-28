@@ -1,14 +1,29 @@
-const loadPhone = async (searchText) =>{
+const loadPhone = async (searchText,isshowAll) =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await res.json();
     const all = data.data
-    displayPhones(all)
+    displayPhones(all,isshowAll)
 }
 
 
-const displayPhones = phones =>{
+const displayPhones = (phones,isshowAll) =>{
     const phn = document.getElementById('cointaner')
     phn.textContent = '';
+      const phnShowAll = document.getElementById('Show-All');
+
+      console.log("show all", isshowAll)
+      if(phones.length > 12 && !isshowAll){
+        phnShowAll.classList.remove('hidden')
+    }
+    else{
+        phnShowAll.classList.add('hidden')
+    }
+
+   if(!isshowAll){
+    phones = phones.slice(0,12)
+   }
+
+    
 
     phones.forEach(phone => {
          const phoneCard = document.createElement('div')
@@ -25,13 +40,28 @@ const displayPhones = phones =>{
          `
          phn.appendChild(phoneCard)
     });
+    lodinngSpenner(false)
 
 }
  
-const search = () => {
+const search = (isshowAll) => {
+    lodinngSpenner(true)
     const searchFild = document.getElementById('Search');
     const searchText = searchFild.value;
-    console.log(searchText)
-    loadPhone(searchText)
+    loadPhone(searchText ,isshowAll)
 }
 
+
+const lodinngSpenner = (isLoading) => {
+    const lodinng = document.getElementById('loading');
+    if(isLoading){
+        lodinng.classList.remove('hidden')
+    }
+    else{
+        lodinng.classList.add('hidden')
+    }
+}
+
+const showAll = () =>{
+    search(true)
+}

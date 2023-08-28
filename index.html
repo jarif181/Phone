@@ -20,7 +20,18 @@
         <button onclick="search()" class="btn btn-accent">SEARCH</button>
       </section>
         <section>
+          <div id="loading" class="text-center mt-20 hidden">
+            <span class="loading loading-spinner text-success"></span>
+          </div>
+
+
+
+          <!-- search Setion -->
             <div id="cointaner" class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 text-black md/lg:px-16 mt-16">
+            </div>
+            <!-- Show All -->
+            <div class="hidden mt-6  text-center" id="Show-All">
+              <button onclick="showAll()" class="btn btn-outline btn-success">Show-All</button>
             </div>
         </section>
     </main>
